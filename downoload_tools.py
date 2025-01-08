@@ -1,7 +1,8 @@
-from requests_tools import get_response
+import requests
 
 
-def download_image(url, save_path, params=None):
-    response = get_response(url, params)
+def download_image(url, save_path):
+    response = requests.get(url)
+    response.raise_for_status()
     with open(save_path, 'wb') as f:
         f.write(response.content)

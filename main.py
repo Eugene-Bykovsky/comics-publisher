@@ -18,9 +18,9 @@ async def main():
     chat_id = env.str('TELEGRAM_CHAT_ID')
     bot = Bot(token)
 
-    comics_response = fetch_random_comic()
-    image = comics_response.get('img')
-    comment = comics_response.get('alt')
+    random_comic = fetch_random_comic().json()
+    image = random_comic.get('img')
+    comment = random_comic.get('alt')
     if image:
         download_image(image, COMICS_PATH)
         await send_image(bot, chat_id, COMICS_PATH)
